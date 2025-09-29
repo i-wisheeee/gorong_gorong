@@ -5,17 +5,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고롱고롱</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         window.onload = () => {
-
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
 
         }; //script end
     </script>
 </head>
 
 <body>
+    <div id="wrap">
+
+        <!-- 헤더 -->
+        <header class="header">
+           
+                <div class="inner">
+                    <div class="left">
+                        <h1 class="logo">
+                            <a href="#"><img src="img/header-logo.svg" alt="고롱고롱로고"></a>
+                        </h1><!-- .logo end -->
+                    </div><!-- .left end -->
+
+                    <div class="center">
+                        <ul class="gnb">
+                            <li><a href="#">고롱고롱의 이야기</a></li>
+                            <li><a href="#">고롱고롱 친구들</a></li>
+                            <li><a href="#">그 집의 고롱고롱</a></li>
+                            <li><a href="#">응답하라 고롱고롱</a></li>
+                        </ul><!-- gnb end -->
+                    </div><!-- .center end -->
+
+                    <div class="nav">
+                        <ul class="gnb">
+                            <li><a href="#"><img src="img/header-1.png" alt="검색하기"></a></li>
+                            <li><a href="#"><img src="img/header-2.png" alt="로그인"></a></li>
+                            <li><a href="#"><img src="img/header-3.png" alt="장바구니"></a></li>
+                        </ul><!-- .gnb end -->
+                    </div><!-- .nav -->
+                </div><!-- .inner end -->
+           
+        </header><!-- .header end -->
+
+
+        <!-- 메인비주얼 -->
+        <main class="main">
+            <section class="main_visual">
+ 
+                    <!-- 스와이퍼슬라이드 추가 -->
+                    <!-- Swiper -->
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="video">
+                                    <video src="img/pc.mp4" autoplay muted loop
+                                        class="pc"></video>
+                                    <video src="img/main1_mobile.mp4" autoplay muted loop
+                                        class="mobile"></video>
+                                </div><!-- video end -->
+                                <h2>온 세상 고양이가 <br />
+                                    고롱고롱 하겠네</h2>
+                            </div><!-- swiper-slide end -->
+                            <div class="swiper-slide">
+                                <img src="img/pcmain1-2.jpg" alt="메인1-2">
+                                <div class="text">
+                                    <strong>26년차 집사의 꼼꼼한 손</strong>
+                                    <p>곁의 아이들에게 주고 싶은 것들을 한땀 한땀 만듭니다.<br />
+                                        하루종일 누워있어도 좋을 <strong>고운 소재,</strong><br />
+                                        즐겁게 긁어도 <strong>괜찮을 마감,</strong><br />
+                                        부지런히 힘 묻혀도 <strong>걱정없을 원단.</strong><br />
+                                        온세상 고양이가 <strong>고롱고롱</strong> 쉴 수있게,<br />
+                                        <strong>수익금의 일부를 쉼터에 기부하고 있어요.</strong>
+                                    </p>
+                                </div><!-- .text end -->
+                            </div><!-- swiper-slide end -->
+
+                        </div><!-- swiper-wrapper end -->
+
+
+                        <div class="swiper-button-next">
+                            <img src="img/main_next.png" alt="다음버튼">
+                        </div><!--swiper-button-next  -->
+                        <div class="swiper-button-prev">
+                            <img src="img/main_pre.png" alt="이전버튼">
+                        </div><!-- swiper-button-prev -->
+
+                        <div class="swiper-pagination"></div>
+                    </div><!-- swiper mySwiper end -->
+
+                    <!-- Swiper JS -->
+            </section><!-- .main_visual end -->
+        </main><!-- .main end -->
+
+
+    </div><!-- wrap end -->
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
