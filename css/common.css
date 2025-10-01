@@ -11,6 +11,28 @@
     font-display: swap;
 }
 
+:root {
+    /* 폰트 */
+    --fontSize-h1: 100px;
+    --fontSize-md: 50px;
+    --fontSize-s: 20px;
+    --fontSize-xs: 16px;
+
+
+    /* 컬러 */
+    --color-border: #FAE38C;
+    --color-background: #F2F2F2;
+    --color-black: #222222;
+
+    /* 마진 */
+    --margin-b-lg: 80px;
+    --margin-b-md: 50px;
+    --linehight1: 1.3;
+    --linehight2: 1.5;
+
+
+}
+
 body {
   font-family: 'Pretendard Variable', sans-serif;
   background-color: #F2F2F2;
