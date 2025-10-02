@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+
+
+
     <script>
 
         window.onload = () => {
@@ -30,7 +36,11 @@
             let section2 = document.getElementsByClassName('section-02')[0];
             let topBtn = document.getElementsByClassName('top_btn')[0];
 
+
+
+            let sectionTop = document.querySelector('.image_wrap').offsetTop;
             window.addEventListener('scroll', () => {
+
 
                 let scrollBar = window.scrollY;
 
@@ -42,34 +52,32 @@
                     topBtn.classList.remove('active');
                 }
 
-            });
 
-            let sectionTop = document.querySelector('.image_wrap').offsetTop;
-            window.addEventListener('scroll', () => {
+                /* section02 가로스크롤 시작 */
                 let transformX = -1 / 15 * window.scrollY + sectionTop / 15
                 console.log(transformX)
                 if (transformX < -100) {
-                    document.querySelector('.scroll-box').style.transform = `translateX(-1000vw)`
+                    document.querySelector('.scroll-box').style.transform = `translateX(-100vw)`
                 } else if (transformX < 0) {
                     document.querySelector('.scroll-box').style.transform = `translateX(${transformX}vw)`
                 }
-            });//메인2
+            });//스크롤 이벤트
 
             gsap.registerPlugin(ScrollTrigger);
 
             ScrollTrigger.defaults({
                 // Defaults are used by all ScrollTriggers
                 toggleActions: "restart pause resume pause", // Scoll effect Forward, Leave, Back, Back Leave
-                markers: true // Easaly remove markers for production 
+                //markers: true // Easaly remove markers for production 
             });
 
             const timelineHeader = gsap.timeline({
                 scrollTrigger: {
                     id: "ZOOM", // Custom label to the marker
                     trigger: "#header-zoom", // What element triggers the scroll
-                    scrub: 0.5, // Add a small delay of scrolling and animation. `true` is direct
+                    scrub: 1.5, // Add a small delay of scrolling and animation. `true` is direct
                     start: "top top", // Start at top of Trigger and at the top of the viewport
-                    end: "+=100% 50px", // The element is 500px hight and end 50px from the top of the viewport
+                    end: "+=100% 100px", // The element is 500px hight and end 50px from the top of the viewport
                     pin: true, // Pin the element true or false
                 }
             });
@@ -78,10 +86,78 @@
                 .to(".image-1", {
                     scale: 1.5
                 }, "sameTime")
-                .to(".image-2", {
-                    scale: 3
-                }, "sameTime")
+            //메인3
 
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 패럴랙스 Y 이동
+            document.querySelectorAll('.item_box li img[data-scroll-speed]').forEach(img => {
+                const speed = parseFloat(img.getAttribute('data-scroll-speed')) || 1;
+                gsap.to(img, {
+                    yPercent: -20 * speed / 10,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: img,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true,
+                    }
+                });
+            });
+
+            // 좌우에서 중앙으로 모임
+            document.querySelectorAll('.item_box li img').forEach((img, i) => {
+                let startX = (i % 2 === 0) ? -200 : 200;
+                gsap.fromTo(img,
+                    { x: startX, opacity: 1 },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        ease: "power1.out",
+                        scrollTrigger: {
+                            trigger: '.section-05',
+                            start: "top center",
+                            end: "bottom center",
+                            scrub: true,
+                        }
+                    });
+            });
+
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector("[data-scroll-container]"),
+                smooth: true
+            });
+
+            // 스크롤 이벤트 핸들
+            scroll.on("call", (value, way, obj) => {
+                if (value === "dynamicColor" && way === "enter") {
+                    // 중앙으로 모으기
+                    const items = document.querySelectorAll(".item_box li");
+                    items.forEach((item, index) => {
+                        item.style.left = "50%";
+                        item.style.top = `${30 + index * 5}%`;
+                        item.style.transform = "translate(-50%, -50%)";
+                    });
+                }
+
+                if (value === "dynamicColor" && way === "leave") {
+                    // 다시 원래 위치로
+                    const positions = [
+                        { top: "20%", left: "-30%" },
+                        { top: "40%", left: "-20%" },
+                        { top: "60%", left: "-10%" },
+                        { top: "20%", left: "130%" },
+                        { top: "40%", left: "120%" },
+                        { top: "60%", left: "110%" },
+                    ];
+                    const items = document.querySelectorAll(".item_box li");
+                    items.forEach((item, index) => {
+                        item.style.left = positions[index].left;
+                        item.style.top = positions[index].top;
+                        item.style.transform = "none";
+                    });
+                }
+            });//메인5
 
         }; //script end
     </script>
@@ -188,7 +264,7 @@
                         <span><a href="#">더보기</a></span>
                     </div><!-- text_wrap end -->
 
-                    <div class="image_wrap">
+                    <div class="image_wrap" data-aos="fade-up" data-aos-delay="500">
 
                         <ul class="scroll-box">
                             <li><img src="img/main2-1.jpg" alt="메인2사진"></li>
@@ -219,131 +295,137 @@
 
             <!-- 메인3 -->
 
-            <section id="header-zoom">
+            <section class="section-03" id="header-zoom">
                 <div class="zoom">
-                    <div class="video-1">
+
+                    <div class="video-1 image image-1">
                         <video src="img/main3-pc.mp4" autoplay muted loop playsinline class="pc"></video>
                         <video src="img/main3-mobile.mp4" autoplay muted loop playsinline class="mobile"></video>
                     </div><!-- video1 end -->
 
                 </div><!-- .zoom end -->
+            </section><!-- section-03 end -->
 
 
 
 
 
+            <!-- 메인4 -->
 
-                <!-- 메인4 -->
-
-                <section class="section-04">
-                    <div class="inner">
-                        <div class="item_wrap" data-aos="fade-right">
-                            <div class="item_inner">
-                                <div class="image">
-                                    <img src="img/main4-1.png" alt="뚱카롱">
-                                </div><!-- image end -->
-                                <div class="left">
-                                    <div class="text">
-                                        <h2>뚱카롱</h2>
-                                        <p>가운데가 살짝 떠있는 해먹스타일 방식.👀<br />
-                                            고롱고롱의 베스트셀러지요.<br />
-                                            고양이가 가운데에 자리잡고 앉으면<br />
-                                            부드럽게 아래로 쳐지면서 몸이 포옥 담기는 디자인입니다.<br /></p>
-                                    </div><!-- text end -->
-                                    <div class="btn">
-                                        <a href="#">뚱카롱 보러가기</a>
-                                    </div><!-- .btn end -->
-                                </div><!-- .left end -->
-                            </div><!-- item_inner end -->
-                        </div><!-- item_wrap end -->
-
-
-                        <div class="item_wrap" div data-aos="fade-left">
-                            <div class="item_inner">
-                                <div class="image">
-                                    <img src="img/main4-2.png" alt="바니쿠션">
-                                </div><!-- image end -->
-                                <div class="left">
-                                    <div class="text">
-                                        <h2>바니쿠션🐰</h2>
-                                        <p>고양이도 집사도 만족하는 바니쿠션.<br />
-                                            하루종일 물고 뜯고 핥아도 안전하게.<br />
-                                            아이들을 귀하게 여기고 아끼는 마음을 담아 정성스레 만들었습니다.<br /></p>
-                                    </div><!-- text end -->
-                                    <div class="btn">
-                                        <a href="#">바니쿠션 보러가기</a>
-                                    </div><!-- .btn end -->
-                                </div><!-- .left end -->
-                            </div><!-- div.item_inner end -->
-                        </div><!-- item_wrap end -->
+            <section class="section-04">
+                <div class="inner">
+                    <div class="item_wrap" data-aos="fade-right">
+                        <div class="item_inner">
+                            <div class="image">
+                                <img src="img/main4-1.png" alt="뚱카롱">
+                            </div><!-- image end -->
+                            <div class="left">
+                                <div class="text">
+                                    <h2>뚱카롱</h2>
+                                    <p>가운데가 살짝 떠있는 해먹스타일 방식.👀<br />
+                                        고롱고롱의 베스트셀러지요.<br />
+                                        고양이가 가운데에 자리잡고 앉으면<br />
+                                        부드럽게 아래로 쳐지면서 몸이 포옥 담기는 디자인입니다.<br /></p>
+                                </div><!-- text end -->
+                                <div class="btn">
+                                    <a href="#">뚱카롱 보러가기</a>
+                                </div><!-- .btn end -->
+                            </div><!-- .left end -->
+                        </div><!-- item_inner end -->
+                    </div><!-- item_wrap end -->
 
 
-                        <div class="item_wrap" div data-aos="fade-right">
-                            <div class="item_inner">
-                                <div class="image">
-                                    <img src="img/main4-3.png" alt="집사의 고롱템">
-                                </div><!-- image end -->
-                                <div class="left">
-                                    <div class="text">
-                                        <h2>집사의 고롱템</h2>
-                                        <p>집사들도 고롱고롱 할 수있는 집사의 고롱템.<br />
-                                            꼼꼼한 바느질과 부드럽고 유니크한<br />
-                                            천연원단들로 만들었습니다.🧶<br /></p>
-                                    </div><!-- text end -->
-                                    <div class="btn">
-                                        <a href="#">집사의 고롱템보러가기</a>
-                                    </div><!-- .btn end -->
-                                </div><!-- .left end -->
-                            </div><!-- div.item_inner -->
-                        </div><!-- item_wrap end -->
+                    <div class="item_wrap" data-aos="fade-left">
+                        <div class="item_inner">
+                            <div class="image">
+                                <img src="img/main4-2.png" alt="바니쿠션">
+                            </div><!-- image end -->
+                            <div class="left">
+                                <div class="text">
+                                    <h2>바니쿠션🐰</h2>
+                                    <p>고양이도 집사도 만족하는 바니쿠션.<br />
+                                        하루종일 물고 뜯고 핥아도 안전하게.<br />
+                                        아이들을 귀하게 여기고 아끼는 마음을 담아 정성스레 만들었습니다.<br /></p>
+                                </div><!-- text end -->
+                                <div class="btn">
+                                    <a href="#">바니쿠션 보러가기</a>
+                                </div><!-- .btn end -->
+                            </div><!-- .left end -->
+                        </div><!-- div.item_inner end -->
+                    </div><!-- item_wrap end -->
 
 
-                    </div><!-- .inner end -->
+                    <div class="item_wrap" data-aos="fade-right">
+                        <div class="item_inner">
+                            <div class="image">
+                                <img src="img/main4-3.png" alt="집사의 고롱템">
+                            </div><!-- image end -->
+                            <div class="left">
+                                <div class="text">
+                                    <h2>집사의 고롱템</h2>
+                                    <p>집사들도 고롱고롱 할 수있는 집사의 고롱템.<br />
+                                        꼼꼼한 바느질과 부드럽고 유니크한<br />
+                                        천연원단들로 만들었습니다.🧶<br /></p>
+                                </div><!-- text end -->
+                                <div class="btn">
+                                    <a href="#">집사의 고롱템보러가기</a>
+                                </div><!-- .btn end -->
+                            </div><!-- .left end -->
+                        </div><!-- div.item_inner -->
+                    </div><!-- item_wrap end -->
 
-                </section><!-- section-04 end -->
 
-                <!-- 메인5 -->
-                <section class="section-05">
-                    <div class="inner">
+                </div><!-- .inner end -->
 
-                        <ul class="item">
-                            <li><img src="img/main5-db1.png" alt="눕덕배"></li>
-                            <li><img src="img/main5-db2.png" alt="웅크린덕배"></li>
-                        </ul><!-- .item end -->
+            </section><!-- section-04 end -->
 
-                        <div class="text">
+            <!-- 메인5 -->
+            <section class="section-05">
+                <div class="inner">
+                    <div class="wrap">
+                        <div class="text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <h3>고롱고롱, <br />
                                 마음이 쉬어가는 시간</h3>
                         </div><!-- .text end -->
 
-                        <div class="item_box">
-                            <img src="img/main5-jang1.png" alt="장난감1">
-                            <img src="img/main5-jang2.png" alt="장난감2">
-                            <img src="img/main5-jang3.png" alt="장난감3">
-                            <img src="img/main5-jang4.png" alt="장난감4">
-                            <img src="img/main5-jang5.png" alt="장난감5">
-                            <img src="img/main5-jang1.png" alt="장난감6">
-                        </div><!-- item_box end -->
+                        <ul class="item">
+                            <li><img src="img/main5-db1.svg" alt="눕덕배"></li>
+                            <li><img src="img/main5-db2.svg" alt="웅크린덕배"></li>
+                        </ul><!-- .item end -->
+
+
+
+
+                        <ul class="item_box">
+                            <li><img src="img/main5-jang1.png" alt="장난감1" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                            <li><img src="img/main5-jang2.png" alt="장난감2" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                            <li><img src="img/main5-jang3.png" alt="장난감3" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                            <li><img src="img/main5-jang4.png" alt="장난감4" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                            <li><img src="img/main5-jang5.png" alt="장난감5" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                            <li><img src="img/main5-jang1.png" alt="장난감6" data-scroll data-scroll-delay="0.06"
+                                    data-scroll-speed="6" data-scroll-call="dynamicColor" data-scroll-repeat></li>
+                        </ul><!-- item_box end -->
+                    </div><!-- wrap end -->
+
+
+                    <div class="box_wrap">
 
                         <ul class="box-01">
-                            <li><img src="img/main5-1.png" alt="방석1"></li>
-                            <li><img src="img/main5-2.png" alt="방석2"></li>
-                            <li><img src="img/main5-3.png" alt="방석3"></li>
+                            <li><img src="img/main5-2.png" alt="방석1"></li>
+                            <li><img src="img/main5-5.png" alt="방석2"></li>
+                            <li><img src="img/main5-1.png" alt="방석3"></li>
                             <li><img src="img/main5-4.png" alt="방석4"></li>
-                            <li><img src="img/main5-5.png" alt="방석5"></li>
-                            <li><img src="img/main5-6.png" alt="방석6"></li>
-                            <li><img src="img/main5-7.png" alt="방석7"></li>
+                            <li><img src="img/main5-3.png" alt="방석5"></li>
+                            <li><img src="img/main5-7.png" alt="방석6"></li>
+                            <li><img src="img/main5-9.png" alt="방석7"></li>
                             <li><img src="img/main5-8.png" alt="방석8"></li>
-                            <li><img src="img/main5-9.png" alt="방석9"></li>
-                            <li><img src="img/main5-1.png" alt="방석1"></li>
-                            <li><img src="img/main5-2.png" alt="방석2"></li>
-                            <li><img src="img/main5-3.png" alt="방석3"></li>
-                            <li><img src="img/main5-4.png" alt="방석4"></li>
-                            <li><img src="img/main5-5.png" alt="방석5"></li>
-                            <li><img src="img/main5-6.png" alt="방석6"></li>
-                            <li><img src="img/main5-7.png" alt="방석7"></li>
-                            <li><img src="img/main5-8.png" alt="방석8"></li>
-                            <li><img src="img/main5-9.png" alt="방석9"></li>
+                            <li><img src="img/main5-6.png" alt="방석9"></li>
+
                         </ul><!-- .box end -->
 
 
@@ -357,33 +439,178 @@
                             <li><img src="img/main5-7.png" alt="방석7"></li>
                             <li><img src="img/main5-8.png" alt="방석8"></li>
                             <li><img src="img/main5-9.png" alt="방석9"></li>
-                            <li><img src="img/main5-1.png" alt="방석1"></li>
-                            <li><img src="img/main5-2.png" alt="방석2"></li>
-                            <li><img src="img/main5-3.png" alt="방석3"></li>
-                            <li><img src="img/main5-4.png" alt="방석4"></li>
-                            <li><img src="img/main5-5.png" alt="방석5"></li>
-                            <li><img src="img/main5-6.png" alt="방석6"></li>
-                            <li><img src="img/main5-7.png" alt="방석7"></li>
-                            <li><img src="img/main5-8.png" alt="방석8"></li>
-                            <li><img src="img/main5-9.png" alt="방석9"></li>
+
                         </ul><!-- .box-02 end -->
+                    </div><!-- .box_wrap end -->
 
 
-
-                    </div><!-- inner end -->
-                </section><!-- section-05 end -->
-
+                </div><!-- inner end -->
+            </section><!-- section-05 end -->
 
 
+            <!-- 메인6 -->
 
+            <section class="section-06">
+                <div class="inner">
+                    <div class="text">
+                        <ul>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                            <li>📢</li>
+                            <li>가족이 애타게 찾고 있어요</li>
+                            <li>🐾</li>
+                        </ul>
+                    </div><!-- .text end -->
+
+                    <div class="image_box">
+                        <ul>
+                            <li><img src="img/main6-1.jpg" alt="실종동물1"></li>
+                            <li><img src="img/main6-2.jpg" alt="실종동물2"></li>
+                            <li><img src="img/main6-3.jpg" alt="실종동물3"></li>
+                            <li><img src="img/main6-4.jpg" alt="실종동물4"></li>
+                            <li><img src="img/main6-5.jpg" alt="실종동물5"></li>
+
+                        </ul>
+                    </div><!-- .image_box end -->
+
+                    <div class="text_wrap">
+                        <ul>
+                            <li>더 자세히 알고싶다면?</li>
+                            <li><a href="#">https://www.animal.go.kr/front/index.do</a></li>
+                            <li>👈 국가동물보호 정보시스템 주소</li>
+                        </ul>
+                    </div><!-- text_wrap end -->
+                </div><!-- .inner end -->
+            </section><!-- section-06 -->
+
+
+            <!-- 메인7 -->
+            <section class="section-07">
+                <div class="inner">
+                    <div class="title">
+                        <h3>응답하라 고롱고롱</h3>
+                        <p>문의하실 사항이 있으시면 언제든 찾아와주세요 🐾︎</p>
+                    </div><!-- .title end -->
+                    <div class="btn">
+                        <a href="#">문의하기</a>
+                    </div><!-- .btn end -->
+                </div><!-- .inner end -->
+            </section><!-- section-07 end -->
+
+            <!-- 메인8 -->
+            <section class="section-08">
+                <div class="inner">
+                <div class="image">
+                    <ul>
+                        <li><img src="img/main8-1.png" alt="인스타이미지1"></li>
+                        <li><img src="img/main8-3.png" alt="인스타이미지2"></li>
+                    </ul>
+
+                </div><!-- .image end -->
+                <div class="right">
+                    <div class="text">
+                        <h3>@gorong_gorong</h3>
+                        <p>고롱고롱으로 놀러오실래요?</p>
+
+                    </div><!-- .text end -->
+                    <div class="icon">
+                        <a href="#">
+                        <img src="img/main8-icon.png" alt="인스타그램아이콘">
+                        </a>
+                    </div><!-- .icon end -->
+                </div><!-- .right end -->
+                </div><!-- .inner end -->
+            </section><!-- .section-08 end -->
 
         </main><!-- .main end -->
 
         <footer class="footer">
+
             <button class="top_btn">
                 <a href="#">
                     <img src="img/puuter-topbutton.svg" alt="top-bottom">
+
                 </a></button><!-- .top_btn end -->
+
+
+        <h1 class="logo">
+            <a href="#"><img src="img/putter-iogo.svg" alt="푸터로고"></a>
+            <div class="text_wrap">
+                <ul class="gnb-01">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">사업자정보확인</a></li>
+                <li><a href="#">1문의</a></li>
+                </ul><!-- .gnb-01 end -->
+                <ul class="gnb-02">
+                <li><a href="#">상호 : 고롱고롱</a></li>
+                <li><a href="#">대표 : 김태이</a></li>
+                <li><a href="#">개인정보관리책임자 : 김태이</a></li>
+                
+                </ul><!-- .gnb-02 end -->
+                <ul class="gnb-03">
+                <li><a href="#">전화 : 010-4024-1660</a></li>
+                <li><a href="#">이메일 : gorongpet@gmail.net</a></li>
+                <li><a href="#">주소 : 경기 남양주시 화도읍 마석중앙로37번길 45 504호 241996</a></li>
+                
+                </ul><!-- .gnb-03 end -->
+                <ul class="gnb-04">
+                <li><a href="#">사업자 등록번호 : 134-36-00675</a></li>
+                <li><a href="#">통신판매업신고번호 : 2019-화도수동-0292</a></li>
+                <li><a href="#">호스팅 제공자 : 주식회사 식스샵</a></li>
+              
+                </ul><!-- .gnb-04 end -->
+                <ul class="gnb-05">
+                <li><a href="#"><img src="img/putter-toss.svg" alt=""></a></li>
+                <li><a href="#">안전구매(에스크로) 서비스 가맹점</a></li>
+                
+              
+                </ul><!-- .gnb-05 end -->
+            </div><!-- .text_wrap -->
+        </h1><!-- .logo end -->
         </footer><!-- .footer end -->
     </div><!-- wrap end -->
 
