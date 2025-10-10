@@ -88,75 +88,75 @@
                 }, "sameTime")
             //메인3
 
-           setTimeout(() => {
-        // 첫 번째 GSAP 애니메이션
-        gsap.to(".section-05 .inner .wrap .item", {
-            yPercent: 100,
-            scrollTrigger: {
-                trigger: ".section-05",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            }
-        });
+            setTimeout(() => {
+                // 첫 번째 GSAP 애니메이션
+                gsap.to(".section-05 .inner .wrap .item", {
+                    yPercent: 100,
+                    scrollTrigger: {
+                        trigger: ".section-05",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true,
+                    }
+                });
 
-        const items = document.querySelectorAll("#item_box li");
-        const wrap = document.querySelector("#item_box");
-        const h3Elem = document.querySelector(".section-05 .wrap .text h3");
+                const items = document.querySelectorAll("#item_box li");
+                const wrap = document.querySelector("#item_box");
+                const h3Elem = document.querySelector(".section-05 .wrap .text h3");
 
-        if (!items.length || !wrap || !h3Elem) return;
+                if (!items.length || !wrap || !h3Elem) return;
 
-        const h3Rect = h3Elem.getBoundingClientRect();
-        const wrapRect = wrap.getBoundingClientRect();
+                const h3Rect = h3Elem.getBoundingClientRect();
+                const wrapRect = wrap.getBoundingClientRect();
 
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-        const h3Top = h3Rect.top + scrollTop;
-        const h3Left = h3Rect.left + scrollLeft;
-        const wrapTop = wrapRect.top + scrollTop;
-        const wrapLeft = wrapRect.left + scrollLeft;
+                const h3Top = h3Rect.top + scrollTop;
+                const h3Left = h3Rect.left + scrollLeft;
+                const wrapTop = wrapRect.top + scrollTop;
+                const wrapLeft = wrapRect.left + scrollLeft;
 
-        const centerPos = {
-            top: ((h3Top + h3Rect.height / 2 - wrapTop) / wrapRect.height) * 100 + "%",
-            left: ((h3Left + h3Rect.width / 2 - wrapLeft) / wrapRect.width) * 100 + "%"
-        };
+                const centerPos = {
+                    top: ((h3Top + h3Rect.height / 2 - wrapTop) / wrapRect.height) * 100 + "%",
+                    left: ((h3Left + h3Rect.width / 2 - wrapLeft) / wrapRect.width) * 100 + "%"
+                };
 
-        const spreadPositions = [
-            { top: "20%", left: "60%" },
-            { top: "20%", left: "80%" },
-            { top: "60%", left: "20%" },
-            { top: "40%", left: "70%" },
-            { top: "70%", left: "40%" },
-            { top: "30%", left: "50%" }
-        ];
+                const spreadPositions = [
+                    { top: "20%", left: "60%" },
+                    { top: "20%", left: "80%" },
+                    { top: "60%", left: "20%" },
+                    { top: "40%", left: "70%" },
+                    { top: "70%", left: "40%" },
+                    { top: "30%", left: "50%" }
+                ];
 
-        // h3 중앙에서 퍼지도록 초기 위치 설정
-        items.forEach(item => {
-            item.style.position = "absolute";
-            item.style.top = centerPos.top;
-            item.style.left = centerPos.left;
-            item.style.transform = "translate(-50%, -50%)";
-        });
+                // h3 중앙에서 퍼지도록 초기 위치 설정
+                items.forEach(item => {
+                    item.style.position = "absolute";
+                    item.style.top = centerPos.top;
+                    item.style.left = centerPos.left;
+                    item.style.transform = "translate(-50%, -50%)";
+                });
 
-        // 퍼지는 애니메이션 설정
-        items.forEach((item, index) => {
-            gsap.to(item, {
-                top: spreadPositions[index].top,
-                left: spreadPositions[index].left,
-                transform: "translate(0, 0)",
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".section-05",
-                    start: "top 30%",
-                    end: "bottom 20%",
-                    scrub: true,
-                    // markers: true // 개발 중에는 확인용으로 활성화
-                }
-            });
-        });
+                // 퍼지는 애니메이션 설정
+                items.forEach((item, index) => {
+                    gsap.to(item, {
+                        top: spreadPositions[index].top,
+                        left: spreadPositions[index].left,
+                        transform: "translate(0, 0)",
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: ".section-05",
+                            start: "top 30%",
+                            end: "bottom 20%",
+                            scrub: true,
+                            // markers: true // 개발 중에는 확인용으로 활성화
+                        }
+                    });
+                });
 
-    }, 100); //메인5
+            }, 100); //메인5
 
 
         }; //script end
@@ -317,7 +317,7 @@
                     <div class="item_wrap" data-aos="fade-right">
                         <div class="item_inner">
                             <div class="image">
-                                <img src="img/main4-1.png" alt="뚱카롱">
+                                <img src="img/main-1.svg" alt="뚱카롱">
                             </div><!-- image end -->
                             <div class="left">
                                 <div class="text">
@@ -338,7 +338,7 @@
                     <div class="item_wrap" data-aos="fade-left">
                         <div class="item_inner">
                             <div class="image">
-                                <img src="img/main4-2.png" alt="바니쿠션">
+                                <img src="img/main4-2.svg" alt="바니쿠션">
                             </div><!-- image end -->
                             <div class="left">
                                 <div class="text">
@@ -358,7 +358,7 @@
                     <div class="item_wrap" data-aos="fade-right">
                         <div class="item_inner">
                             <div class="image">
-                                <img src="img/main4-3.png" alt="집사의 고롱템">
+                                <img src="img/main4-3.svg" alt="집사의 고롱템">
                             </div><!-- image end -->
                             <div class="left">
                                 <div class="text">
@@ -530,7 +530,7 @@
             <!-- 메인7 -->
             <section class="section-07">
                 <div class="inner">
-                    <div class="title">
+                    <div class="title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <h3>응답하라 고롱고롱</h3>
                         <p>문의하실 사항이 있으시면 언제든 찾아와주세요 🐾︎</p>
                     </div><!-- .title end -->
@@ -543,7 +543,7 @@
             <!-- 메인8 -->
             <section class="section-08">
                 <div class="inner">
-                    <div class="image">
+                    <div class="image" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <ul>
                             <li><img src="img/main8-1.png" alt="인스타이미지1"></li>
                             <li><img src="img/main8-3.png" alt="인스타이미지2"></li>
@@ -551,7 +551,7 @@
 
                     </div><!-- .image end -->
                     <div class="right">
-                        <div class="text">
+                        <div class="text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <h3>@gorong_gorong</h3>
                             <p>고롱고롱으로 놀러오실래요?</p>
 
@@ -576,8 +576,10 @@
                 </a></button><!-- .top_btn end -->
 
 
-            <h1 class="logo">
+            <div class="logo">
                 <a href="#"><img src="img/putter-iogo.svg" alt="푸터로고"></a>
+            </div><!-- .logo end -->
+            <div class="inner">
                 <div class="text_wrap">
                     <ul class="gnb-01">
                         <li><a href="#">이용약관</a></li>
@@ -609,8 +611,12 @@
 
 
                     </ul><!-- .gnb-05 end -->
+
+                    <ul class="gnb-06">
+                        <p>©김소원.2025 ALL RIGHTS RESERVED</p>
+                    </ul><!-- .gnb-06 end -->
                 </div><!-- .text_wrap -->
-            </h1><!-- .logo end -->
+            </div><!-- .inner end -->
         </footer><!-- .footer end -->
     </div><!-- wrap end -->
 
