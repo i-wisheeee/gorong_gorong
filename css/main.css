@@ -58,20 +58,26 @@ body {
     width: 100%;
     margin: 0 auto;
     z-index: 99;
+    position: fixed;
+    transition: top 0.7s ease;
+}
 
+.header.active {
+    top: -100px;
+    opacity: 0;
 }
 
 
 
 .header .inner {
-    width: calc(100% - 32px);
+    width: calc(100% - 90px);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     line-height: 53px;
     text-align: center;
-    padding: 18px 0 30px;
+    padding: 30px 0;
     border-bottom: 1px solid #A3A3A3;
 
 }
@@ -109,6 +115,13 @@ body {
     width: 20px;
     height: 20px;
     display: block;
+}
+
+.header .inner .center .gnb li a:hover {
+    background-color: #fae28c93;
+    padding: 0 5px;
+    display: block;
+
 }
 
 .header .inner .nav .gnb li a img {
@@ -267,19 +280,20 @@ body {
 /* 메인2 */
 .section-02 {
 
-
     width: 100%;
 
 }
 
 .section-02 .inner {
-    width: calc(100% - 177px);
+    width: calc(100% - 32px);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-
+    background-color: transparent;
     align-items: flex-start;
     padding: 250px 0;
+    overflow: hidden;
+    position: relative;
 
 
 }
@@ -291,7 +305,7 @@ body {
     justify-content: space-between;
     font-size: var(--fontSize-s);
     line-height: 1.8;
-
+    margin-left: 100px;
 
 
 }
@@ -323,56 +337,55 @@ body {
 
 }
 
-.section-02 .inner .text_wrap span a:hover {
-    background-color: #61AEF6;
-    border: 1px solid #B7B2B2;
-    width: 200px;
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    border-radius: 50px;
-    font-weight: bold;
-    display: inline-block;
-    color: #F2F2F2;
-}
-
 .section-02 .inner .image_wrap {
-    width: 50%;
-    height: calc(100vh * 3);
-    /* 3 화면 분량 */
-    position: relative;
-    /* sticky 상위 컨테이너 */
+
+    height: 100vh;
+    margin-left: 250px;
+    padding-bottom: 200px;
+
 }
 
 .section-02 .inner .image_wrap .scroll-box {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 300vw;
-    height: 100vh;
-    /* 뷰포트 높이만큼 */
+    width: calc(100vw * 13);
+    /* 이미지 13개니까, 최소 13배는 줘야 함 */
     display: flex;
-    gap: 50px;
-    transition: all 0.3s;
+    gap: 80px;
+    white-space: nowrap;
+    position: relative;
+    /* sticky는 gsap pin이 처리하므로 필요 없음 */
+    overflow: visible;
+    /* gsap 스크롤 애니메이션을 위해 visible */
+    padding: 200px 0;
 }
 
 .section-02 .inner .image_wrap .scroll-box li {
-
-
-    height: 100vh;
-    display: inline-block;
-
-
+    flex: 0 0 auto;
+    width: 520px;
+    height: 520px;
 }
 
-.section-02 .inner .image_wrap .scroll-box li img {
+.section-02 .inner .image_wrap .scroll-box li .box {
     width: 100%;
-
-
-    object-fit: contain;
-
+    height: 100%;
 }
 
+.section-02 .inner .image_wrap .scroll-box li .box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-02 .inner .image_wrap .scroll-box li.a {
+    transform: rotate(-15deg);
+}
+
+.section-02 .inner .image_wrap .scroll-box li.c {
+    transform: rotate(-8deg);
+}
+
+.section-02 .inner .image_wrap .scroll-box li.b {
+    transform: rotate(-10deg);
+}
 
 /* 메인3 */
 .section-03 {

@@ -53,54 +53,77 @@
                 }
 
 
-                /* section02 가로스크롤 시작 */
-                let transformX = -1 / 15 * window.scrollY + sectionTop / 15
-                console.log(transformX)
-                if (transformX < -100) {
-                    document.querySelector('.scroll-box').style.transform = `translateX(-100vw)`
-                } else if (transformX < 0) {
-                    document.querySelector('.scroll-box').style.transform = `translateX(${transformX}vw)`
-                }
+
             });//스크롤 이벤트
-
             gsap.registerPlugin(ScrollTrigger);
+            let scroll = gsap.utils.toArray('.image_wrap .scroll-box li')
+            let scrollA = gsap.utils.toArray('.image_wrap .scroll-box .a')
+            let scrollB = gsap.utils.toArray('.image_wrap .scroll-box .b')
+            let scrollC = gsap.utils.toArray('.image_wrap .scroll-box .c')
 
-            ScrollTrigger.defaults({
-                // Defaults are used by all ScrollTriggers
-                toggleActions: "restart pause resume pause", // Scoll effect Forward, Leave, Back, Back Leave
-                //markers: true // Easaly remove markers for production 
+            let scrollTween = gsap.to(scroll, {
+                xPercent: -100 * (scroll.length - 1),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.image_wrap',
+                    pin: true,
+                    scrub: 1,
+                    start: 'center center',
+                    end: '25%',
+                    //markers: true
+                }
+
             });
 
-            const timelineHeader = gsap.timeline({
+            gsap.to(scrollA, {
+                y: 50,
+                rotate: 10,
                 scrollTrigger: {
-                    id: "ZOOM", // Custom label to the marker
-                    trigger: "#header-zoom", // What element triggers the scroll
-                    scrub: 1.5, // Add a small delay of scrolling and animation. `true` is direct
-                    start: "top top", // Start at top of Trigger and at the top of the viewport
-                    end: "+=100% 100px", // The element is 500px hight and end 50px from the top of the viewport
-                    pin: true, // Pin the element true or false
+                    trigger: '.image_wrap',
+                    scrub: 2,
+                    end: '200%'
                 }
             });
 
-            timelineHeader
-                .to(".image-1", {
-                    scale: 1.5
-                }, "sameTime")
-            //메인3
+            gsap.to(scrollB, {
+                y: -50,
+                rotate: 20,
+                scrollTrigger: {
+                    trigger: '.image_wrap',
+                    scrub: 2,
+                    end: '200%'
+                }
+            });
+
+            gsap.to(scrollC, {
+                y: -50,
+                x: 20,
+                rotate: -10,
+                scrollTrigger: {
+                    trigger: '.image_wrap',
+                    scrub: 2,
+                    end: '200%'
+                }
+            });
+            //메인2
+
+
 
             setTimeout(() => {
-                // 첫 번째 GSAP 애니메이션
                 gsap.to(".section-05 .inner .wrap .item", {
-                    yPercent: 100,
+                    yPercent: 100, // 위로 100% 이동
                     scrollTrigger: {
                         trigger: ".section-05",
                         start: "top top",
                         end: "bottom top",
                         scrub: true,
+                        //pin: true,
                     }
                 });
 
                 const items = document.querySelectorAll("#item_box li");
+
+                //  고롱고롱 텍스트 기준 중앙점
                 const wrap = document.querySelector("#item_box");
                 const h3Elem = document.querySelector(".section-05 .wrap .text h3");
 
@@ -109,19 +132,23 @@
                 const h3Rect = h3Elem.getBoundingClientRect();
                 const wrapRect = wrap.getBoundingClientRect();
 
+                // 스크롤 위치 보정
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
                 const h3Top = h3Rect.top + scrollTop;
                 const h3Left = h3Rect.left + scrollLeft;
+
                 const wrapTop = wrapRect.top + scrollTop;
                 const wrapLeft = wrapRect.left + scrollLeft;
 
+                // 중앙 위치를 wrap 기준 %로 계산
                 const centerPos = {
                     top: ((h3Top + h3Rect.height / 2 - wrapTop) / wrapRect.height) * 100 + "%",
                     left: ((h3Left + h3Rect.width / 2 - wrapLeft) / wrapRect.width) * 100 + "%"
                 };
 
+                // 퍼질 위치 (퍼센트 기준)
                 const spreadPositions = [
                     { top: "20%", left: "60%" },
                     { top: "20%", left: "80%" },
@@ -131,7 +158,7 @@
                     { top: "30%", left: "50%" }
                 ];
 
-                // h3 중앙에서 퍼지도록 초기 위치 설정
+                // 시작 위치 설정: h3 중앙 기준
                 items.forEach(item => {
                     item.style.position = "absolute";
                     item.style.top = centerPos.top;
@@ -139,7 +166,7 @@
                     item.style.transform = "translate(-50%, -50%)";
                 });
 
-                // 퍼지는 애니메이션 설정
+                // 스크롤 트리거 애니메이션
                 items.forEach((item, index) => {
                     gsap.to(item, {
                         top: spreadPositions[index].top,
@@ -150,13 +177,37 @@
                             trigger: ".section-05",
                             start: "top 30%",
                             end: "bottom 20%",
-                            scrub: true,
-                            // markers: true // 개발 중에는 확인용으로 활성화
+                            scrub: true
+                            // markers: true // 개발 중일 땐 켜도 됨
                         }
                     });
                 });
+            }, 100);//메인5
 
-            }, 100); //메인5
+            let header = document.querySelector('.header'); //.header
+            let prevScrollBar = 0; //이전 스크롤바의 위치
+
+            window.addEventListener('scroll', () => {
+                let scrollBar = window.scrollY; //현재 스크롤바의 위치
+
+                console.log(prevScrollBar)
+                console.log(scrollBar)
+
+
+
+                if(scrollBar > prevScrollBar) {
+                    
+                header.classList.add('active');
+            } else {
+                header.classList.remove('active');
+            }
+
+                prevScrollBar = scrollBar;
+
+
+            }); //scroll()
+
+
 
 
         }; //script end
@@ -267,19 +318,19 @@
                     <div class="image_wrap" data-aos="fade-up" data-aos-delay="500">
 
                         <ul class="scroll-box">
-                            <li><img src="img/main2-1.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-2.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-3.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-4.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-5.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-6.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-7.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-8.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-9.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-10.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-11.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-12.jpg" alt="메인2사진"></li>
-                            <li><img src="img/main2-13.jpg" alt="메인2사진"></li>
+                            <li class="a"><div class="box"><img src="img/main2-1.jpg" alt="메인2사진"></div></li>
+                            <li class="b"><div class="box"><img src="img/main2-2.jpg" alt="메인2사진"></div></li>
+                            <li class="c"><div class="box"><img src="img/main2-3.jpg" alt="메인2사진"></div></li>
+                            <li class="b"><div class="box"><img src="img/main2-4.jpg" alt="메인2사진"></div></li>
+                            <li class="c"><div class="box"><img src="img/main2-5.jpg" alt="메인2사진"></div></li>
+                            <li class="a"><div class="box"><img src="img/main2-6.jpg" alt="메인2사진"></div></li>
+                            <li class="c"><div class="box"><img src="img/main2-7.jpg" alt="메인2사진"></div></li>
+                            <li class="b"><div class="box"><img src="img/main2-8.jpg" alt="메인2사진"></div></li>
+                            <li class="a"><div class="box"><img src="img/main2-9.jpg" alt="메인2사진"></div></li>
+                            <li class="b"><div class="box"><img src="img/main2-10.jpg" alt="메인2사진"></div></li>
+                            <li class="c"><div class="box"><img src="img/main2-11.jpg" alt="메인2사진"></div></li>
+                            <li class="b"><div class="box"><img src="img/main2-12.jpg" alt="메인2사진"></div></li>
+                            <li class="a"><div class="box"><img src="img/main2-13.jpg" alt="메인2사진"></div></li>
 
                         </ul><!-- .scroll-box -->
 
