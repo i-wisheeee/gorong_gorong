@@ -9,6 +9,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -33,6 +36,8 @@
                 },
             });
 
+
+            let topJquery = $('.top_btn');
             let section2 = document.getElementsByClassName('section-02')[0];
             let topBtn = document.getElementsByClassName('top_btn')[0];
 
@@ -54,7 +59,19 @@
 
 
 
-            });//스크롤 이벤트
+            });
+            
+            topJquery.on('click', function(){
+                
+                $('html, body').animate({
+                    scrollTop : 0
+                }, 1000); //1000=1초(시간)
+
+
+            });
+
+
+            //스크롤 이벤트
             gsap.registerPlugin(ScrollTrigger);
             let scroll = gsap.utils.toArray('.image_wrap .scroll-box li')
             let scrollA = gsap.utils.toArray('.image_wrap .scroll-box .a')
@@ -157,7 +174,7 @@
                     { top: "70%", left: "40%" },
                     { top: "30%", left: "50%" }
                 ];
-                
+
                 // 시작 위치 설정: h3 중앙 기준
                 items.forEach(item => {
                     item.style.position = "absolute";
@@ -652,10 +669,10 @@
         <footer class="footer">
 
             <button class="top_btn">
-                <a href="#">
-                    <img src="img/puuter-topbutton.svg" alt="top-bottom">
 
-                </a></button><!-- .top_btn end -->
+                <img src="img/puuter-topbutton.svg" alt="top-bottom">
+
+            </button><!-- .top_btn end -->
 
 
             <div class="logo">
