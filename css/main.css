@@ -571,13 +571,16 @@ body {
     background: #FAE38C;
     background: linear-gradient(180deg, rgba(250, 227, 140, 0) 5%, rgba(250, 227, 140, 1) 100%);
 
+
+
 }
 
 .section-05 .inner {
 
     /* height: 100vh;  추후에 추가*/
     position: relative;
-
+    background-image: url('../img/main5.png');
+    
 }
 
 .section-05 .inner .wrap {
@@ -585,7 +588,7 @@ body {
 }
 
 .section-05 .inner .wrap .item {
-    background-image: url('../img/main5-db3.svg');
+    background-image: url('../img/main5-db3.png');
     margin-top: 500px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -605,7 +608,7 @@ body {
     width: 50%;
     position: absolute;
     top: 10%;
-    right: 35%;
+    right: 30%;
 
 
 }
@@ -838,7 +841,7 @@ body {
 
 
     background-size: cover;
-    background-position: center;
+    background-position: center center;
 
 
     display: block;
@@ -1747,11 +1750,12 @@ body {
     .section-03 .video .pc {
         display: none;
     }
+
     .section-08 {
         margin-bottom: 100px;
     }
 }
- 
+
 
 @media screen and (max-width: 550px) {
 
