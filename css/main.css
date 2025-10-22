@@ -1584,7 +1584,7 @@ body {
 
     .section-02 .inner .text_wrap p strong {
         display: block;
-        white-space: nowrap;
+        white-space: nomal;
     }
 
     .section-02 .inner .text_wrap span a {
@@ -2233,10 +2233,12 @@ body {
         display: none;
     }
 
-
+  .section-02 {
+    background-color: #7474748c;
+  }
 
     .section-02 .inner {
-        position: relative;
+        
         width: calc(100% - 32px);
         margin: 0 auto;
     }
@@ -2249,7 +2251,7 @@ body {
 
         text-align: center;
         padding: 10px;
-        height: 100vh;
+       
 
 
 
@@ -2258,56 +2260,44 @@ body {
     .section-02 .inner .text_wrap p,
     .section-02 .inner .text_wrap p strong {
         color: #fff;
-        display: block;
+        
+        
+       white-space: nomal;
         font-size: 14px;
-        position: fixed;
+       
         line-height: 1.5;
-        white-space: nowrap;
+        
     }
 
 
     .section-02 .inner .text_wrap span a {
-        display: inline-block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, 80%);
-        position: fixed;
+        
+        
+       
+      
+       
     }
 
-    /* 가로스크롤가능하게설정 */
-    .section-02 .inner .image_wrap {
-        overflow-x: hidden;
-        white-space: nowrap;
-    }
+  
 
-    .section-02 .inner .image_wrap ul {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-    }
+ 
 
     .section-02 .inner .image_wrap .scroll-box {
         width: 100%;
         height: 100vh;
-        display: block;
+        display: flex;
+        gap: 20px;
 
     }
 
-    .section-02 .inner .image_wrap .scroll-box li {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
+    
 
     .section-02 .inner .image_wrap .scroll-box li {
 
         width: 100%;
         height: 100%;
         object-fit: cover;
-        display: block;
+       
 
     }
 
@@ -2336,6 +2326,10 @@ body {
         width: 100%;
         margin: 0 auto;
     }
+    .section-04 .inner .item_wrap .item_inner .image:nth-child(1) img,
+    .section-04 .inner .item_wrap .item_inner .image:nth-child(3) img {
+        order: -1;
+    } 
 
     .section-04 .inner .item_wrap .item_inner {
         display: flex;
@@ -2370,25 +2364,22 @@ body {
     }
 
     .section-04 .inner .item_wrap .item_inner .left .btn a {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 60px;
         background-size: contain;
         display: block;
     }
 
-    .section-04 .inner .item_wrap .item_inner .left .btn {
-        width: 276px;
-        height: 60px;
 
-    }
+    
 
 
 
     .section-04 .inner .item_wrap .item_inner .image {
 
-        width: 70%;
+        width: 100%;
         height: 70%;
-        order: 1;
+      
 
     }
 
@@ -2402,7 +2393,7 @@ body {
         font-size: 50px;
     }
 
-
+   .section-05 .inner .wrap #item_box li
 
     .section-06 .inner .image_box ul {
         flex-wrap: nowrap;
