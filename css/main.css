@@ -3,8 +3,18 @@
 @import url('common.css');
 
 
+
+
 body {
     overflow-x: hidden;
+}
+
+.loading span {
+    font-family: 'MemomentKkukkukkR';
+
+    font-weight: normal;
+    color: #222222;
+    font-size: 50px;
 }
 
 .header .inner .center .gnb li a {
@@ -48,6 +58,149 @@ body {
     font-weight: normal;
     color: #222222;
 }
+
+/* 로딩페이지 */
+.loading {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(#fffaf5, #ffeef3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+
+}
+
+.loading>div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* 세로 정렬 */
+
+    gap: 20px;
+}
+
+
+/* 발자국 span img 공통 스타일 */
+.loading span:nth-child(-n+4) img {
+    width: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: pawDrop 0.5s forwards;
+}
+
+
+.loading span:nth-child(1) img {
+    position: absolute;
+    top: -10%;
+    left: -20px;
+    animation-delay: 0s;
+}
+
+.loading span:nth-child(2) img {
+    position: absolute;
+    top: 30%;
+    left: 40px;
+    animation-delay: 0.5s;
+}
+
+.loading span:nth-child(3) img {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    animation-delay: 1s;
+}
+
+.loading span:nth-child(4) img {
+    position: absolute;
+    top: 90%;
+    left: 40px;
+    animation-delay: 1.5s;
+}
+
+
+
+@keyframes pawDrop {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.loading span:nth-child(5) {
+    margin-top: 50px;
+    font-size: 50px;
+    color: #ff8ba7;
+    opacity: 0;
+    animation: fadeInText 1s forwards;
+    animation-delay: 2s;
+    text-align: center;
+    display: block;
+}
+
+
+.loading span:nth-child(6),
+.loading span:nth-child(7) {
+    font-size: 28px;
+    color: #ffb6c1;
+    opacity: 0;
+    position: relative;
+    animation-fill-mode: forwards;
+}
+
+.loading span:nth-child(6) {
+    animation: floatZ 3s ease-in-out forwards;
+    animation-delay: 3s;
+}
+
+.loading span:nth-child(7) {
+    animation: floatZZ 3s ease-in-out forwards;
+    animation-delay: 3.8s;
+}
+
+@keyframes fadeInText {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes floatZ {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.8);
+    }
+}
+
+@keyframes floatZZ {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-25px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+}
+
+
 
 /* 헤더 */
 .header {
@@ -581,9 +734,9 @@ body {
     position: relative;
     background-image: url('../img/main5.png');
     background-repeat: no-repeat;
-   
+
     background-position: cover;
-    
+
 }
 
 .section-05 .inner .wrap {
@@ -838,8 +991,8 @@ body {
 
 .section-07 .inner {
     background-image: url('../img/main7_pc.png');
-   
-    
+
+
     margin: 0 auto;
     background-repeat: no-repeat;
 
@@ -992,6 +1145,7 @@ body {
 .section-09 {
     display: none;
 }
+
 .section-09 .inner .item {
     cursor: pointer;
     display: block;
@@ -1625,7 +1779,7 @@ body {
         position: absolute;
         top: 250px;
         left: 0;
-        
+
     }
 
     .section-04 .inner .item_wrap .item_inner .left:nth-child(2) .btn {
@@ -2092,11 +2246,11 @@ body {
         padding: 2px;
     }
 
-     .section-09 .inner {
+    .section-09 .inner {
         gap: 10px;
         margin-bottom: 50px;
         cursor: pointer;
-     }
+    }
 }
 
 @media screen and (max-width: 380px) {
@@ -2243,12 +2397,12 @@ body {
         display: none;
     }
 
-  .section-02 {
-    background-color: #7474748c;
-  }
+    .section-02 {
+        background-color: #7474748c;
+    }
 
     .section-02 .inner {
-        
+
         width: calc(100% - 32px);
         margin: 0 auto;
     }
@@ -2261,7 +2415,7 @@ body {
 
         text-align: center;
         padding: 10px;
-       
+
 
 
 
@@ -2270,27 +2424,21 @@ body {
     .section-02 .inner .text_wrap p,
     .section-02 .inner .text_wrap p strong {
         color: #fff;
-        
-        
-       white-space: nomal;
+
+
+        white-space: nomal;
         font-size: 14px;
-       
+
         line-height: 1.5;
-        
+
     }
 
 
-    .section-02 .inner .text_wrap span a {
-        
-        
-       
-      
-       
-    }
+    .section-02 .inner .text_wrap span a {}
 
-  
 
- 
+
+
 
     .section-02 .inner .image_wrap .scroll-box {
         width: 100%;
@@ -2300,14 +2448,14 @@ body {
 
     }
 
-    
+
 
     .section-02 .inner .image_wrap .scroll-box li {
 
         width: 100%;
         height: 100%;
         object-fit: cover;
-       
+
 
     }
 
@@ -2336,10 +2484,11 @@ body {
         width: 100%;
         margin: 0 auto;
     }
+
     .section-04 .inner .item_wrap .item_inner .image:nth-child(1) img,
     .section-04 .inner .item_wrap .item_inner .image:nth-child(3) img {
         order: -1;
-    } 
+    }
 
     .section-04 .inner .item_wrap .item_inner {
         display: flex;
@@ -2381,7 +2530,7 @@ body {
     }
 
 
-    
+
 
 
 
@@ -2389,7 +2538,7 @@ body {
 
         width: 100%;
         height: 70%;
-      
+
 
     }
 
@@ -2403,7 +2552,7 @@ body {
         font-size: 50px;
     }
 
-   
+
 
     .section-06 .inner .image_box ul {
         flex-wrap: nowrap;
@@ -2443,12 +2592,12 @@ body {
     }
 
     .section-08 .inner .image {
-        
+
         display: flex;
         flex-direction: column;
         width: 100%;
-        
-       
+
+
     }
 
     .section-08 .inner .image img {
@@ -2457,7 +2606,7 @@ body {
         height: 100%;
         object-fit: cover;
         width: 100%;
-        
+
     }
 
     .section-08 .inner .right {
@@ -2484,7 +2633,7 @@ body {
 
     .section-09 {
         width: 100%;
-        
+
     }
 
     .section-09 .inner {
@@ -2494,18 +2643,18 @@ body {
         text-align: center;
         gap: 10px;
 
-     
+
     }
 
     .section-09 .inner .item {
 
         border: 1px solid #222222;
         width: 100%;
-       
+
         margin: 0 auto;
         text-align: center;
 
-        
+
 
     }
 

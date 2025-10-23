@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+   
 
 
 
@@ -60,11 +60,11 @@
 
 
             });
-            
-            topJquery.on('click', function(){
-                
+
+            topJquery.on('click', function () {
+
                 $('html, body').animate({
-                    scrollTop : 0
+                    scrollTop: 0
                 }, 1000); //1000=1초(시간)
 
 
@@ -225,6 +225,15 @@
             }); //scroll()
 
 
+            $(function () {
+                $('.loading').addClass('active');
+
+                setTimeout(function () {
+                    $('.loading').animate({
+                        opacity:0, top: '-=100px'
+                    },800).slideUp();
+                }, 7000);
+            });
 
 
         }; //script end
@@ -232,7 +241,23 @@
 </head>
 
 <body>
+
+    <div class="loading">
+        <div>
+            <span><img src="img/paw.png" alt=""></span>
+            <span><img src="img/paws.png" alt=""></span>
+            <span><img src="img/paw.png" alt=""></span>
+            <span><img src="img/paws.png" alt=""></span>
+            <span>고롱고롱 마음이 쉬어가는 시간</span>
+            <span>z</span>
+            <span>Ｚ</span>
+        </div>
+    </div><!-- .loading end -->
+
+
+
     <div id="wrap">
+
 
         <!-- 헤더 -->
         <header class="header">
@@ -255,7 +280,7 @@
 
                 <div class="nav">
                     <ul class="gnb">
-                        
+
                         <li><a href="#"><img src="img/header-1.svg" alt="검색하기"></a></li>
                         <li><a href="#"><img src="img/header-2.svg" alt="로그인"></a></li>
                         <li><a href="#"><img src="img/header-3.svg" alt="장바구니"></a></li>
@@ -660,8 +685,10 @@
 
             <section class="section-09">
                 <div class="inner">
-                    <div class="item text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><img src="img/call.svg" alt="전화" class="call"> 010-4024-1660</div>
-                    <div class="item text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><img src="img/mail.svg" alt="전화" class="mail"> gorongpet@gmail.net</div>
+                    <div class="item text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><img
+                            src="img/call.svg" alt="전화" class="call"> 010-4024-1660</div>
+                    <div class="item text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><img
+                            src="img/mail.svg" alt="전화" class="mail"> gorongpet@gmail.net</div>
                 </div><!-- .inner end -->
             </section><!-- .section-09 end -->
 
