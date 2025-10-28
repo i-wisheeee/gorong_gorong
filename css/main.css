@@ -68,7 +68,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    
+
 
 }
 
@@ -250,14 +250,66 @@ body {
     object-fit: cover;
 }
 
+.header .inner .center .gnb>li {
+    position: relative;
+}
+
 .header .inner .center .gnb {
     display: flex;
     gap: 60px;
 }
 
-.header .inner .center .gnb li a {
+.header .inner .center .gnb>li a {
     font-size: 20px;
+
+    text-decoration: none;
 }
+
+
+
+.header .inner .center .gnb>li>a.depth-01:hover {
+    border-bottom: 1px dotted #fff;
+    color: #F2F2F2;
+}
+
+.header .inner .center .gnb .depth-02 {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    padding: 5px 5px;
+    color: #F2F2F2;
+
+}
+
+.header .inner .center .gnb>li:hover>a.depth-01 {
+    background-color: #fae28c93;
+    padding: 10px 0;
+}
+
+.header .inner .center .gnb>li:hover .depth-02 {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+
+}
+
+.header .inner .center .gnb .depth-02 li a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+
+
+}
+
+.header .inner .center .gnb .depth-02 li:hover {}
 
 .header .inner .nav .gnb {
     display: flex;
@@ -265,18 +317,19 @@ body {
     align-items: center;
     line-height: 20px;
     gap: 36px;
+    width: 100%;
 }
 
 
 .header .inner .nav .gnb li a {
-    width: 20px;
+    width: 100%;
     font-size: 20px;
     display: block;
 }
 
 .header .inner .center .gnb li a:hover {
     background-color: #fae28c93;
-    padding: 0 5px;
+
     display: block;
 
 }
@@ -298,6 +351,42 @@ body {
     display: none;
 }
 
+
+/* 검색창 위치 기준 */
+.nav {
+    position: relative;
+}
+
+.search-form {
+    position: absolute;
+    top: 100%;
+    /* nav 바로 아래 */
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 220px;
+    box-sizing: border-box;
+
+    display: none;
+    z-index: 100;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 5px;
+    margin: 20px auto;
+    border: 1px solid #292929;
+    background-color: #c9c9c9;
+    border-radius: 30px;
+}
+
+.search-form button {
+    padding: 0 10px;
+    cursor: pointer;
+    border: 1px solid #777777;
+    background-color: #fff;
+}
 
 
 /* 메인1 */
@@ -1319,6 +1408,17 @@ body {
 
     .header .inner .center .gnb li a {
         font-size: 14px;
+
+    }
+
+    .header .inner .center .gnb .depth-02 li a {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        white-space: nowrap;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
 
     }
 
