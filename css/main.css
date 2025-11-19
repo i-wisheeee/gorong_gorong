@@ -233,6 +233,8 @@ body {
     padding: 30px 0;
     border-bottom: 1px solid #A3A3A3;
 
+    position: relative;
+
 }
 
 .header .inner .left {}
@@ -287,6 +289,8 @@ body {
 .header .inner .center .gnb>li:hover>a.depth-01 {
     background-color: #fae28c93;
     padding: 10px 0;
+    display: block;
+    color: #F2F2F2;
 }
 
 .header .inner .center .gnb>li:hover .depth-02 {
@@ -353,19 +357,17 @@ body {
 
 
 /* 검색창 위치 기준 */
-.nav {
-    position: relative;
-}
+.nav {}
 
 .search-form {
     position: absolute;
-    top: 100%;
+    top: 114px;
     /* nav 바로 아래 */
     right: 0;
     background: #fff;
     border: 1px solid #ccc;
     padding: 10px;
-    width: 220px;
+    width: 500px;
     box-sizing: border-box;
 
     display: none;
@@ -379,14 +381,25 @@ body {
     border: 1px solid #292929;
     background-color: #c9c9c9;
     border-radius: 30px;
+
 }
 
 .search-form button {
-    padding: 0 10px;
+    padding: 0 100px;
     cursor: pointer;
     border: 1px solid #777777;
     background-color: #fff;
+
+
+
+
 }
+
+.search-form button:hover {
+    background-color: #FAE38C;
+    font-weight: bold;
+}
+
 
 
 /* 메인1 */
@@ -495,6 +508,9 @@ body {
 .main .main_visual .swiper.mySwiper .swiper-button-next {
     width: 40px;
     height: 42px;
+    position: absolute;
+    top: 50%;
+    right: 2%;
 
 }
 
@@ -507,6 +523,9 @@ body {
 .main .main_visual .swiper.mySwiper .swiper-button-prev {
     width: 40px;
     height: 42px;
+    position: absolute;
+    top: 50%;
+    left: 2%;
 
 }
 
@@ -569,7 +588,7 @@ body {
     white-space: nowrap;
 }
 
-.section-02 .inner .text_wrap span a {
+.section-02 .inner .text_wrap a {
     background-color: #FAE38C;
     display: inline-block;
     border: 1px solid #B7B2B2;
@@ -582,6 +601,12 @@ body {
 
 
 }
+
+.section-02 .inner .text_wrap a:hover {
+    color: #F2F2F2;
+    background-color: #61AEF6;
+}
+
 
 .section-02 .inner .image_wrap {
 
